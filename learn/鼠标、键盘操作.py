@@ -1,6 +1,9 @@
 from selenium import webdriver
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.common.by import By
 import time
 
 
@@ -39,3 +42,19 @@ driver.set_window_size(200, 150)
 driver.forward()
 driver.back()
 driver.refresh()
+
+# 时间等待
+# 强制等待
+time.sleep(5)
+# 隐式等待
+driver.implicitly_wait(5)
+# 显示等待
+WebDriverWait(driver, 20).until(expected_conditions.
+                                presence_of_element_located((By.ID, "submit"))).click()
+
+WebDriverWait(driver, 20).until(
+    lambda driver: driver.find_element_by_id("submit").click())
+
+
+# 利用js操作，解除网页限制
+driver.execute_script('document.getElementById("id").readOnly=false;')
